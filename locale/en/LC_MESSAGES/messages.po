@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-28 16:48-0700\n"
-"PO-Revision-Date: 2015-05-28 16:48-0700\n"
+"POT-Creation-Date: 2015-05-29 15:17-0700\n"
+"PO-Revision-Date: 2015-05-29 15:17-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: /Users/andy/sandboxes/payments-config/payments_config/products.py:11
 msgid "Such a fine brick"
-msgstr "Such a fine brick"
+msgstr "Waaaaa!"
 
 #: /Users/andy/sandboxes/payments-config/payments_config/products.py:16
 msgid "Some mortar"

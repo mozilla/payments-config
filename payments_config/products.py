@@ -1,4 +1,5 @@
-from gettext import gettext as _
+from utils import wrapper as _
+
 
 config = {
     # Concrete is Mozilla's example site.

@@ -1,4 +1,7 @@
+from decimal import Decimal
+
 from products import config
+
 
 products = {}
 sellers = {}
@@ -43,6 +46,7 @@ class Product(object):
         for k, v in config.items():
             setattr(self, k, v)
 
+        self.amount = Decimal(self.amount)
         products[self.id] = self
 
     def to_dump(self):

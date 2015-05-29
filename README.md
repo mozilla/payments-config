@@ -7,7 +7,7 @@ In Python:
 ```
 >>> from payments_config import products
 >>> products['mozilla-concrete-brick'].amount
-'10.00'
+Decimal('10.00')
 ```
 
 In Node:
@@ -19,6 +19,4 @@ In Node:
 ```
 
 TODO:
-* get feedback
 * build automagically from Travis
-* figure out the best format for payments-ui to pull in
