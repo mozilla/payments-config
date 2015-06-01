@@ -1,0 +1,14 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install flake8
+before_script:
+- flake8 .
+script: python test.py
+notifications:
+  irc:
+    channels:
+    - irc.mozilla.org#payments
+    on_success: change
+    on_failure: always
