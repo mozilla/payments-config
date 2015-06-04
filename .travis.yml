@@ -12,3 +12,11 @@ notifications:
     - irc.mozilla.org#payments
     on_success: change
     on_failure: always
+deploy:
+  provider: pypi
+  user: andymckay
+  on:
+    all_branches: true
+    tags: true
+  password:
+    secure: VpZdCX4d81ORxXatTx1GTe3LBjb+U2qkbybeQnfx2rnIlUw8DOvmfP9mln6mhaTwHs0g8L92ANvQcw0S3RX7djIw7dffoKVgUVNPty2NZZh6rfGXjRLWMpmte9/CFc5y2atVCrJRwfz7i4JA1O6h1FgGine6/7lv1qEbKN/PRMUuoW4hg27vefugJPnnyuaCGU90Xj4/45B2D9axHB9nhyPa/z73Ma0s5LkiAQtoLczo3VHhXsHh0n0LgNfG6csZeUZZlpMFlOpfwo0JGom/B0tNanzTMCZuCTQdbXftfwNIc6zJ2XtiDLm8BP/aO8iNZKa6TeXrmEH4jgcpGk1C0qIWU4rnOceZlf28djLehFn3acqo8v7GVEgXFCKlaI16nHVu/aj3/PGI7ME6CyWKdiGfsAAPh+39NYxrB9yyaD1hej1SeSyvKr/SJdi74OsRwdB8TD1MZL5OWCfkYGputFlgzAXmWR0E0GfpPr8KpYhXFZimLMtRZhoq5bNfxlXsFtafLnHGT/6CByh1wWIMy+fc0+CsCxTVNjf3qNf3LnvHF+hBhj6UXoYrsGhv+MoTJOp6qSY5jUcOS1rxxJNVvMPealHyUPzrFW9ponRmlM3qLnE94Pa5zqdZBufcbwG2zqrKFxyd5Ca7nKZhUK5ezqbQYou41DAxJTzdepvQxzM=
