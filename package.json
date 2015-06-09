@@ -1,0 +1,18 @@
+{
+  "name": "mozilla-payments-config",
+  "version": "0.0.2",
+  "description": "Payments Config",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozilla/payments-config.git"
+  },
+  "author": "Mozilla Payments Team",
+  "license": "MPL 2.0",
+  "bugs": {
+    "url": "https://github.com/mozilla/payments-config/issues"
+  },
+  "homepage": "https://github.com/mozilla/payments-config#readme"
+}
