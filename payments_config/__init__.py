@@ -35,7 +35,7 @@ class Product(object):
         self.active = True
         self.currency = 'USD'
         self.img = ('https://raw.githubusercontent.com/mozilla'
-                    '/payments-config/master/config/assets/brick.png')
+                    '/payments-config/master/payments_config/assets/brick.png')
 
         self.id = id + '-' + config.pop('id')
 
