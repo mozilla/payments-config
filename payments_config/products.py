@@ -17,7 +17,8 @@ config = {
                 'description': _('Some mortar'),
                 'amount': '5.00',
                 'img': ('https://raw.githubusercontent.com/mozilla'
-                        '/payments-config/master/config/assets/mortar.png'),
+                        '/payments-config/master/payments_config'
+                        '/assets/mortar.png'),
             }
         ]
     }

@@ -2,7 +2,7 @@
   "description": {
     "en": "Such a fine brick"
   }, 
-  "img": "https://raw.githubusercontent.com/mozilla/payments-config/master/config/assets/brick.png", 
+  "img": "https://raw.githubusercontent.com/mozilla/payments-config/master/payments_config/assets/brick.png", 
   "currency": "USD", 
   "amount": "10.00", 
   "active": true, 
