@@ -1,2 +1,4 @@
-payments_config
 *.py
+dist
+payments_config
+payments_config.egg-info
