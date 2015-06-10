@@ -1,3 +1,9 @@
+[![Build Status](https://travis-ci.org/mozilla/payments-config.svg?branch=0.0.4)](https://travis-ci.org/mozilla/payments-config)
+[![npm version](https://badge.fury.io/js/mozilla-payments-config.svg)](http://badge.fury.io/js/mozilla-payments-config)
+[![PyPI version](https://badge.fury.io/py/payments-config.svg)](http://badge.fury.io/py/payments-config)
+
+# Payments Config
+
 Configuration of products for payments-service, solitude et al.
 
 `python generate.py` creates translations and json files.
@@ -18,5 +24,12 @@ In Node:
 > 10.00
 ```
 
-TODO:
-* build automagically from Travis
+## Making a release
+
+* Bump the version in `payments_config/version.py`
+* Bump the version in `package.json`
+* Commit and push to master
+* Go to the [releases page](https://github.com/mozilla/payments-config/releases)
+  and make a new release using the version e.g. 0.0.4 for the tag and Release
+  title.
+* Travis will automagically make releases on PyPi and npm for you.
