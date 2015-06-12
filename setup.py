@@ -1,24 +1,23 @@
-import os
-import re
+import json
 from setuptools import find_packages, setup
 
 
-def get_version(package):
+def get_version():
     """
-    Return package version as listed in `__version__` in `version.py`.
+    Return package version as in package.json.
     """
-    init_py = open(os.path.join(package, 'version.py')).read()
-    return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
+    return json.load(open('package.json', 'r'))['version']
 
 
 setup(
     name='payments-config',
-    version=get_version('payments_config'),
+    version=get_version(),
     description='Payments Configuration',
     author='Andy McKay',
     author_email='andym@mozilla.com',
     license='BSD',
     packages=find_packages(),
+    install_requires=('babel'),
     url='https://github.com/andymckay/payments-config',
     zip_safe=False,
 )

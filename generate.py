@@ -5,7 +5,7 @@ import os
 from os import path
 
 from payments_config import products, sellers
-from payments_config.utils import locales, wrapper
+from payments_config.utils import possible_locales, ready_locales, wrapper
 
 
 root = path.abspath(path.join(path.dirname(__file__)))
@@ -17,7 +17,7 @@ class Encoder(json.JSONEncoder):
         if isinstance(o, wrapper):
             # Always supply en.
             res = {'en': o.msg}
-            for locale in locales:
+            for locale in ready_locales:
                 try:
                     lang = gettext.translation(
                         'messages', 'locale',
@@ -53,7 +53,7 @@ def generate_po():
            .format(filename))
     os.system(cmd)
 
-    for locale in locales:
+    for locale in possible_locales:
         if locale == 'templates':
             continue
         filename = path.join(root, 'locale', locale, 'LC_MESSAGES/messages.po')

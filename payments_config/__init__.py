@@ -1,7 +1,10 @@
 from decimal import Decimal
 
-from products import config
+import babel
+from babel import numbers
 
+from products import config
+from payments_config.utils import ready_locales
 
 products = {}
 sellers = {}
@@ -35,7 +38,8 @@ class Product(object):
         self.active = True
         self.currency = 'USD'
         self.img = ('https://raw.githubusercontent.com/mozilla'
-                    '/payments-config/master/payments_config/assets/brick.png')
+                    '/payments-config/master/payments_config'
+                    '/assets/default.png')
 
         self.id = id + '-' + config.pop('id')
 
@@ -47,7 +51,22 @@ class Product(object):
             setattr(self, k, v)
 
         self.amount = Decimal(self.amount)
+
+        self.price = self.format_prices(ready_locales)
+
         products[self.id] = self
+
+    def format_prices(self, locales):
+        prices = {}
+        for locale in locales:
+            try:
+                prices[locale] = numbers.format_currency(
+                    self.amount, self.currency, locale=locale)
+            except babel.core.UnknownLocaleError:
+                print 'Ignoring unknown locale: {}'.format(locale)
+                continue
+
+        return prices
 
     def to_dump(self):
         return self.__dict__
