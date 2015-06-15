@@ -26,7 +26,6 @@ In Node:
 
 ## Making a release
 
-* Bump the version in `payments_config/version.py`
 * Bump the version in `package.json`
 * Commit and push to master
 * Go to the [releases page](https://github.com/mozilla/payments-config/releases)

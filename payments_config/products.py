@@ -9,12 +9,12 @@ config = {
         'products': [
             {
                 'id': 'brick',
-                'description': _('Such a fine brick'),
+                'description': _('Brick'),
                 'amount': '10.00',
             },
             {
                 'id': 'mortar',
-                'description': _('Some mortar'),
+                'description': _('Mortar'),
                 'amount': '5.00',
                 'img': ('https://raw.githubusercontent.com/mozilla'
                         '/payments-config/master/payments_config'
