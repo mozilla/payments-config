@@ -11,21 +11,31 @@ sellers = {}
 
 
 class Seller(object):
+    required = ['name', 'products']
 
     def __init__(self, id, config):
         self.id = id
-        self.products = [Product(self.id, p) for p in config.pop('products')]
+
+        for k in self.required:
+            if k not in config:
+                raise ValueError('Missing {} on seller'.format(k))
+
+        for k, v in config.items():
+            setattr(self, k, v)
+
+        self.products = [Product(self, p) for p in config.pop('products')]
 
         # Check ids are unique.
         if self.id in sellers:
             raise ValueError('Repeated seller uid: {}'.format(self.id))
 
-        for k, v in config.items():
-            setattr(self, k, v)
-
         sellers[self.id] = self
 
     def to_dump(self):
+        """
+        Remove the products when dumping the seller, since the
+        products will be dumped seperately.
+        """
         data = self.__dict__.copy()
         data.pop('products')
         return data
@@ -33,15 +43,16 @@ class Seller(object):
 
 class Product(object):
 
-    def __init__(self, id, config):
+    def __init__(self, seller, config):
         # Provide some defaults.
         self.active = True
         self.currency = 'USD'
+        self.seller = seller
         self.img = ('https://raw.githubusercontent.com/mozilla'
                     '/payments-config/master/payments_config'
                     '/assets/default.png')
 
-        self.id = id + '-' + config.pop('id')
+        self.id = seller.id + '-' + config.pop('id')
 
         # Check ids are unique.
         if self.id in products:
@@ -69,7 +80,14 @@ class Product(object):
         return prices
 
     def to_dump(self):
-        return self.__dict__
+        """
+        When dumping the product, dump the seller as well, but not the
+        products (removed in seller.to_dump), otherwise you'll be in a
+        recursive mess.
+        """
+        data = self.__dict__.copy()
+        data['seller'] = self.seller.to_dump()
+        return data
 
 
 if not products and not sellers:
