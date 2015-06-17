@@ -4,6 +4,7 @@ from utils import wrapper as _
 config = {
     # Concrete is Mozilla's example site.
     'mozilla-concrete': {
+        'name': _('Mozilla Concrete'),
         'url': 'http://pay.dev.mozaws.net/',
         'terms': 'http://pay.dev.mozaws.net/terms/',
         'products': [
