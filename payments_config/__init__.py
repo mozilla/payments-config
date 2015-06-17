@@ -32,10 +32,8 @@ class Seller(object):
         sellers[self.id] = self
 
     def to_dump(self):
-        """
-        Remove the products when dumping the seller, since the
-        products will be dumped seperately.
-        """
+        # Remove the products when dumping the seller, since the
+        # products will be dumped seperately.
         data = self.__dict__.copy()
         data.pop('products')
         return data
@@ -80,11 +78,9 @@ class Product(object):
         return prices
 
     def to_dump(self):
-        """
-        When dumping the product, dump the seller as well, but not the
-        products (removed in seller.to_dump), otherwise you'll be in a
-        recursive mess.
-        """
+        # When dumping the product, dump the seller as well, but not the
+        # products (removed in seller.to_dump), otherwise you'll be in a
+        # recursive mess.
         data = self.__dict__.copy()
         data['seller'] = self.seller.to_dump()
         return data
