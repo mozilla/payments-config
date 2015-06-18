@@ -1,6 +1,6 @@
 {
   "name": "mozilla-payments-config",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Payments Config",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
