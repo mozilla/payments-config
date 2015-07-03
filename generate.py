@@ -2,11 +2,11 @@ import decimal
 import gettext
 import json
 import os
+import sys
 from os import path
 
 from payments_config import products, sellers
-from payments_config.utils import possible_locales, ready_locales, wrapper
-
+from payments_config.utils import ready_locales, wrapper
 
 root = path.abspath(path.join(path.dirname(__file__)))
 
@@ -20,7 +20,7 @@ class Encoder(json.JSONEncoder):
             for locale in ready_locales:
                 try:
                     lang = gettext.translation(
-                        'messages', 'locale',
+                        'payments-config', '../payments-l10n/locale',
                         languages=[locale])
                 except IOError:
                     continue
@@ -47,21 +47,10 @@ def as_json():
             json.dumps(seller.to_dump(), cls=Encoder, indent=2))
 
 
-def generate_po():
-    filename = path.join(root, 'payments_config/products.py')
-    cmd = ('xgettext {} -o locale/templates/LC_MESSAGES/messages.pot'
-           .format(filename))
-    os.system(cmd)
-
-    for locale in possible_locales:
-        if locale == 'templates':
-            continue
-        filename = path.join(root, 'locale', locale, 'LC_MESSAGES/messages.po')
-        cmd = ('msginit --input=locale/templates/LC_MESSAGES/messages.pot '
-               '--locale={} --no-translator --output={}'
-               .format(locale, filename))
-        os.system(cmd)
-
-
 if __name__ == '__main__':
+    l10n = os.path.abspath('../payments-l10n')
+    if not os.path.exists(l10n):
+        print 'Payments l10n not found, looking for it here: ' + l10n
+        print '... exiting.'
+        sys.exit(1)
     as_json()
