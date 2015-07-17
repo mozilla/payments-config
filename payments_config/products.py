@@ -7,6 +7,7 @@ config = {
         'name': {
             'en': 'Mozilla Concrete'
         },
+        'email': 'support@concrete.mozilla.org',
         'url': 'http://pay.dev.mozaws.net/',
         'terms': 'http://pay.dev.mozaws.net/terms/',
         'products': [
