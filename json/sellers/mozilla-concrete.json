@@ -1,8 +1,9 @@
 {
-  "url": "http://pay.dev.mozaws.net/", 
   "terms": "http://pay.dev.mozaws.net/terms/", 
-  "id": "mozilla-concrete", 
   "name": {
     "en": "Mozilla Concrete"
-  }
+  }, 
+  "url": "http://pay.dev.mozaws.net/", 
+  "id": "mozilla-concrete", 
+  "email": "support@concrete.mozilla.org"
 }
