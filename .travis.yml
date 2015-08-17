@@ -2,7 +2,7 @@ language: python
 python:
 - '2.7'
 install:
-- pip install flake8
+- pip install flake8 twine
 - python setup.py develop
 after_script:
 - flake8 .
@@ -14,6 +14,7 @@ notifications:
     on_success: change
     on_failure: always
 deploy:
+  matrix:
   - provider: pypi
     user: andymckay
     on:
@@ -26,4 +27,4 @@ deploy:
       tags: true
       repo: mozilla/payments-config
     api_key:
-      secure: c5onC/ZB0K0ratVVxrAwN4So9tbTNmKRICMh0Eh1G4gWztCGouT7f56G4+fAA3ZLFq2fw8BlAGG1lQaI2Pz5y9az1sTeUuxwaJ6301/1NGR+O0D7mptXu2/FZ7Mqiip5ZhlVMjYfMeJfwhuZhl4zdOnm1wqNfPDVJUtAIOaf9yRoxRCodDYXoEeI7zYgVbC+YNlk7llGQZ8BD2fFYu3BdgCUp0HmqRAfUyvQOUm1Uq4wwSxkemcDt9wah4fCjzIdYJaGdviohwYGL/xD8FE8eXCfwAsrREbXPgNGURNOY4brcn2AwcwQDPhvIhqGVAjj0GjnIec7Ym3NcD0lizhXpiBti5mqpxHb1HYtJycU0Xblx/JLX2bXY4biE52NgchHRJKVHUj7LoW1+AW4XTOp4hJP8pyBqj+mheTJUKr6ctY0ulDvEu6tsBxni3zRODWw/hH6kkTU6EH5HJ9KZWEzYinetAw0rc8GS+RVnDWZAwxO45ui/zrL/h/TH4wJhPGuXdvwHx10yPE360J14TqhTlJt5HNKGwemgdqCVzh3NcfhY4GpIVIBxHbF5hdSIdKWjS3Jwg0840cwQ1q1B9YMM0MLA7IszA9Sw/G7hFFpL8pcZwPuMmdxQrK1yYOUXbFcoZe5iISbiRwqTMV1OKqATlYH5fHFw9i0fEIyOOikDEE=
+      secure: jbkrKDUTbAcNGhqWgICh3+wmn6lRVTwH+PsKDKsBHXYda1uECTh8DtzMZD7im4YW0GTWXint4xQX4U3nh7bIj1KvyCQ1XiPhih4ym17iQN0drHw1IgzkXxb67QICriL4pLW3ZoV10AardLFRl6pSM0+W+071njmn5m7u4w/qyX/fDW89DpRzROYajzXEaDM38tAUGLkPGVWI4thamvamBMvBxdTI+DK3zUGiS/Pg5NpvvwqgetlOIKlq+0d7U3YFblrQRVuQV6udXXPm+gpj35htFug9DQmByKjeUe62q54rH9+UPWchJ1tVY0pdYnJKDLmWQCzebc2/c9Zc2jHtR5RI2AKET6DucAHW4UkkqgGGp0+CGk79VDSlWuVSX2ArUmkSM28aqiTbovqMisLBtMGWFhpWTd4oiU68kDNCVuAe6b75in0bDLZDwM80VAiE2wZulij/8xsjvFhpQ90X93M7pMxmj7BcIuCw+qMirnnDTz50+PB9/6vnANcdhG+6CTPSriKylMYsHp0FxHL6YPecg8rfVJSaZuDiOnhFwo67EG79YAtOeGH1wci7Z17YviC+z+1JpEjYmdlKIbMtfrrrY3/uIh5V+2xmK3B/JsJsT/DS5ebbuBAUPsUTRHeWzcpBBhG1QqbLc1Dgb5zypWKpFasQ6lo/CtoXGM410jk=
