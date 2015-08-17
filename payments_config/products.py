@@ -8,11 +8,14 @@ config = {
         'name': _('Mozilla Concrete'),
         'url': 'http://pay.dev.mozaws.net/',
         'terms': 'http://pay.dev.mozaws.net/terms/',
+        'kind': 'products',
         'products': [
             {
                 'id': 'brick',
                 'description': _('Brick'),
                 'amount': '10.00',
+                # Currently, recurrence infers authentication.
+                'recurrence': 'monthly',
             },
             {
                 'id': 'mortar',
@@ -21,7 +24,23 @@ config = {
                 'img': ('https://raw.githubusercontent.com/mozilla'
                         '/payments-config/master/payments_config'
                         '/assets/mortar.png'),
+                'recurrence': 'monthly',
             }
         ]
-    }
+    },
+    'mozilla-foundation': {
+        'email': 'support@foundation.mozilla.org',
+        'name': _('Mozilla Foundation'),
+        'url': 'http://pay.dev.mozaws.net/',
+        'terms': 'http://pay.dev.mozaws.net/terms/',
+        'kind': 'donations',
+        'products': [
+            {
+                # A single purchase with a variable amount, no authentication.
+                'id': 'donation',
+                'description': _('Donation'),
+                'recurrence': None,
+            }
+        ]
+    },
 }

@@ -1,9 +1,10 @@
 {
+  "kind": "products", 
   "terms": "http://pay.dev.mozaws.net/terms/", 
   "name": {
     "en": "Mozilla Concrete"
   }, 
   "url": "http://pay.dev.mozaws.net/", 
-  "id": "mozilla-concrete", 
-  "email": "support@concrete.mozilla.org"
+  "email": "support@concrete.mozilla.org", 
+  "id": "mozilla-concrete"
 }
