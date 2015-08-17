@@ -14,7 +14,6 @@ notifications:
     on_success: change
     on_failure: always
 deploy:
-  matrix:
   - provider: pypi
     user: andymckay
     on:
