@@ -11,7 +11,7 @@ sellers = {}
 
 
 class Seller(object):
-    required = ['name', 'products']
+    required = ['kind', 'name', 'products']
 
     def __init__(self, id, config):
         self.id = id
@@ -29,6 +29,9 @@ class Seller(object):
         if self.id in sellers:
             raise ValueError('Repeated seller uid: {}'.format(self.id))
 
+        if self.kind not in ['products', 'donations']:
+            raise ValueError('Unknown kind of seller: {}'.format(self.kind))
+
         sellers[self.id] = self
 
     def to_dump(self):
@@ -40,15 +43,22 @@ class Seller(object):
 
 
 class Product(object):
+    required = ['id', 'description', 'recurrence']
 
     def __init__(self, seller, config):
         # Provide some defaults.
+        self.amount = None
         self.active = True
         self.currency = 'USD'
         self.seller = seller
+        self.recurrence = None
         self.img = ('https://raw.githubusercontent.com/mozilla'
                     '/payments-config/master/payments_config'
                     '/assets/default.png')
+
+        for k in self.required:
+            if k not in config:
+                raise ValueError('Missing {} on product'.format(k))
 
         self.id = seller.id + '-' + config.pop('id')
 
@@ -59,7 +69,12 @@ class Product(object):
         for k, v in config.items():
             setattr(self, k, v)
 
-        self.amount = Decimal(self.amount)
+        if self.recurrence and self.recurrence not in ['monthly']:
+            raise ValueError('Recurrence should be not set or monthly: {}'.
+                             format(self.recurrence))
+
+        if self.amount:
+            self.amount = Decimal(self.amount)
 
         self.price = self.format_prices(ready_locales)
 
@@ -67,6 +82,9 @@ class Product(object):
 
     def format_prices(self, locales):
         prices = {}
+        if not self.amount:
+            return prices
+
         for locale in locales:
             try:
                 prices[locale] = numbers.format_currency(

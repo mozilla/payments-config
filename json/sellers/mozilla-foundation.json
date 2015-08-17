@@ -1,0 +1,10 @@
+{
+  "kind": "donations", 
+  "terms": "http://pay.dev.mozaws.net/terms/", 
+  "name": {
+    "en": "Mozilla Foundation"
+  }, 
+  "url": "http://pay.dev.mozaws.net/", 
+  "email": "support@foundation.mozilla.org", 
+  "id": "mozilla-foundation"
+}

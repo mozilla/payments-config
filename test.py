@@ -9,11 +9,16 @@ from payments_config.utils import wrapper
 
 def example_seller(**kw):
     data = {
-        'url': 'http://example.com',
+        'kind': 'products',
         'name': 'example',
-        'products': [
-            {'id': 'test', 'amount': '3', 'currency': 'CAD'}
-        ]
+        'products': [{
+            'amount': '3',
+            'currency': 'CAD',
+            'description': 'f',
+            'id': 'test',
+            'recurrence': 'monthly',
+        }],
+        'url': 'http://example.com',
     }
     data.update(**kw)
     return Seller('mozilla-concrete', data)
@@ -48,6 +53,18 @@ class TestSeller(unittest.TestCase):
         res = s.products[0].to_dump()
         assert s.name == res['seller']['name']
 
+    def test_kind(self):
+        with self.assertRaises(ValueError):
+            example_seller(kind='arms-dealer')
+
+    def test_no_amount(self):
+        s = example_seller(products=[{
+            'description': 'some-description',
+            'id': 'no-amount',
+            'recurrence': None,
+        }])
+        assert s.products[0].amount == None
+        assert s.products[0].price == {}
 
 if __name__ == '__main__':
     unittest.main()
