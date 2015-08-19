@@ -23,16 +23,10 @@ class Seller(object):
         for k, v in config.items():
             setattr(self, k, v)
 
-        self.products = [Product(self, p) for p in config.pop('products')]
-
-        # Check ids are unique.
-        if self.id in sellers:
-            raise ValueError('Repeated seller uid: {}'.format(self.id))
+        self.products = [Product(self, p) for p in config['products']]
 
         if self.kind not in ['products', 'donations']:
             raise ValueError('Unknown kind of seller: {}'.format(self.kind))
-
-        sellers[self.id] = self
 
     def to_dump(self):
         # Remove the products when dumping the seller, since the
@@ -46,7 +40,6 @@ class Product(object):
     required = ['id', 'description', 'recurrence']
 
     def __init__(self, seller, config):
-        # Provide some defaults.
         self.amount = None
         self.active = True
         self.currency = 'USD'
@@ -60,14 +53,10 @@ class Product(object):
             if k not in config:
                 raise ValueError('Missing {} on product'.format(k))
 
-        self.id = seller.id + '-' + config.pop('id')
-
-        # Check ids are unique.
-        if self.id in products:
-            raise ValueError('Repeated product uid: {}'.format(self.id))
-
         for k, v in config.items():
             setattr(self, k, v)
+
+        self.id = seller.id + '-' + config['id']
 
         if self.recurrence and self.recurrence not in ['monthly']:
             raise ValueError('Recurrence should be not set or monthly: {}'.
@@ -77,8 +66,6 @@ class Product(object):
             self.amount = Decimal(self.amount)
 
         self.price = self.format_prices(ready_locales)
-
-        products[self.id] = self
 
     def format_prices(self, locales):
         prices = {}
@@ -104,6 +91,25 @@ class Product(object):
         return data
 
 
-if not products and not sellers:
-    for key, seller in config.items():
-        Seller(key, seller)
+def populate(configuration):
+    """
+    Returns two dictionaries of sellers and products populated by the
+    configuration.
+    """
+    seller_store, product_store = {}, {}
+    for key, seller in configuration.items():
+        seller_obj = Seller(key, seller)
+
+        seller_store[seller_obj.id] = seller_obj
+        for product_obj in seller_obj.products:
+            # Check ids are unique.
+            if product_obj.id in product_store:
+                raise ValueError(
+                    'Repeated product uid: {}'.format(product_obj.id))
+
+            product_store[product_obj.id] = product_obj
+
+    return seller_store, product_store
+
+if not sellers and not products:
+    sellers, products = populate(config)

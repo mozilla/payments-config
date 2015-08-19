@@ -13,6 +13,7 @@ ready_locales = [
     'en'
 ]
 
+
 class wrapper(object):
     """
     Wrap translated strings so they can be identified by the encoder.
