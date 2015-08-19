@@ -1,25 +1,29 @@
+import copy
 import json
 import unittest
 
 from generate import Encoder
-import payments_config
 from payments_config import Seller
+from payments_config import populate
 from payments_config.utils import wrapper
 
 
+example_data = {
+    'kind': 'products',
+    'name': 'example',
+    'products': [{
+        'amount': '3',
+        'currency': 'CAD',
+        'description': 'f',
+        'id': 'test',
+        'recurrence': 'monthly',
+    }],
+    'url': 'http://example.com',
+}
+
+
 def example_seller(**kw):
-    data = {
-        'kind': 'products',
-        'name': 'example',
-        'products': [{
-            'amount': '3',
-            'currency': 'CAD',
-            'description': 'f',
-            'id': 'test',
-            'recurrence': 'monthly',
-        }],
-        'url': 'http://example.com',
-    }
+    data = copy.deepcopy(example_data)
     data.update(**kw)
     return Seller('mozilla-concrete', data)
 
@@ -32,10 +36,6 @@ class TestTranslation(unittest.TestCase):
 
 
 class TestSeller(unittest.TestCase):
-
-    def setUp(self):
-        payments_config.products = {}
-        payments_config.sellers = {}
 
     def test_prices(self):
         s = example_seller()
@@ -63,8 +63,26 @@ class TestSeller(unittest.TestCase):
             'id': 'no-amount',
             'recurrence': None,
         }])
-        assert s.products[0].amount == None
+        assert s.products[0].amount is None
         assert s.products[0].price == {}
+
+
+class TestRepeats(unittest.TestCase):
+
+    def setUp(self):
+        self.data = {'moz': copy.deepcopy(example_data)}
+        super(TestRepeats, self).setUp()
+
+    def test_duplicated_product(self):
+        self.data['moz']['products'].append(example_data['products'][0])
+        with self.assertRaises(ValueError):
+            populate(self.data)
+
+    def test_populate(self):
+        sellers, products = populate(self.data)
+        assert sellers['moz'].kind == 'products'
+        assert products['moz-test'].amount == 3
+
 
 if __name__ == '__main__':
     unittest.main()
