@@ -37,7 +37,8 @@ class Seller(object):
 
 
 class Product(object):
-    required = ['id', 'description', 'recurrence']
+    required = ['id', 'description', 'recurrence', 'user_identification']
+    valid_user_identifications = ['fxa-auth', 'email', None]
 
     def __init__(self, seller, config):
         self.amount = None
@@ -61,6 +62,10 @@ class Product(object):
         if self.recurrence and self.recurrence not in ['monthly']:
             raise ValueError('Recurrence should be not set or monthly: {}'.
                              format(self.recurrence))
+
+        if (self.user_identification not in self.valid_user_identifications):
+            raise ValueError('user_identification must be one of: {}'.
+                             format(self.valid_user_identifications))
 
         if self.amount:
             self.amount = Decimal(self.amount)
