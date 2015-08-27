@@ -17,6 +17,7 @@ example_data = {
         'description': 'f',
         'id': 'test',
         'recurrence': 'monthly',
+        'user_identification': None,
     }],
     'url': 'http://example.com',
 }
@@ -62,9 +63,27 @@ class TestSeller(unittest.TestCase):
             'description': 'some-description',
             'id': 'no-amount',
             'recurrence': None,
+            'user_identification': None,
         }])
         assert s.products[0].amount is None
         assert s.products[0].price == {}
+
+    def test_user_identification_is_valid_option(self):
+        with self.assertRaises(ValueError):
+            example_seller(products=[{
+                'id': 'hai',
+                'description': 'a description',
+                'recurrence': None,
+                'user_identification': True,
+            }])
+
+    def test_user_identification_is_required(self):
+        with self.assertRaises(ValueError):
+            example_seller(products=[{
+                'id': 'hai',
+                'description': 'a description',
+                'recurrence': None,
+            }])
 
 
 class TestRepeats(unittest.TestCase):

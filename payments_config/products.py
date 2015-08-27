@@ -16,6 +16,7 @@ config = {
                 'amount': '10.00',
                 # Currently, recurrence infers authentication.
                 'recurrence': 'monthly',
+                'user_identification': 'fxa-auth',
             },
             {
                 'id': 'mortar',
@@ -25,6 +26,7 @@ config = {
                         '/payments-config/master/payments_config'
                         '/assets/mortar.png'),
                 'recurrence': 'monthly',
+                'user_identification': 'fxa-auth',
             }
         ]
     },
@@ -40,7 +42,17 @@ config = {
                 'id': 'donation',
                 'description': _('Donation'),
                 'recurrence': None,
+                'user_identification': None,
+            },
+            {
+                # A recurring donation with a variable amount.
+                # Email address required.
+                'id': 'recurring-donation',
+                'description': _('Recurring Donation'),
+                'recurrence': 'monthly',
+                'user_identification': 'email',
             }
+
         ]
     },
 }
