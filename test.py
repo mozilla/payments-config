@@ -55,7 +55,7 @@ class TestSeller(unittest.TestCase):
         assert s.name == res['seller']['name']
 
     def test_kind(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegexp(ValueError, 'Unknown kind'):
             example_seller(kind='arms-dealer')
 
     def test_no_amount(self):
@@ -69,7 +69,7 @@ class TestSeller(unittest.TestCase):
         assert s.products[0].price == {}
 
     def test_user_identification_is_valid_option(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegexp(ValueError, 'user_identification must'):
             example_seller(products=[{
                 'id': 'hai',
                 'description': 'a description',
@@ -78,7 +78,7 @@ class TestSeller(unittest.TestCase):
             }])
 
     def test_user_identification_is_required(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegexp(ValueError, 'Missing user_ident'):
             example_seller(products=[{
                 'id': 'hai',
                 'description': 'a description',
@@ -94,7 +94,7 @@ class TestRepeats(unittest.TestCase):
 
     def test_duplicated_product(self):
         self.data['moz']['products'].append(example_data['products'][0])
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegexp(ValueError, 'Repeated product'):
             populate(self.data)
 
     def test_populate(self):
