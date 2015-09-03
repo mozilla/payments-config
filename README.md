@@ -6,6 +6,18 @@
 
 Configuration of products for payments-service, solitude et al.
 
+# Installation
+
+`pip install payments-config`
+
+# Development
+
+To install the dependencies and start to use payment-config, run:
+
+`python setup.py develop`
+
+# Usage
+
 `python generate.py` creates translations and json files.
 
 In Python:
